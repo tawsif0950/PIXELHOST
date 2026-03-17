@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { UploadCloud, Code, Key, Zap, Image as ImageIcon, Link2, CheckCircle2, Info, FileImage, Lightbulb, AlertTriangle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';

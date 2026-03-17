@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { 
   Zap, 
   Shield, 
@@ -41,13 +41,6 @@ export default function Home() {
       title: "Multiple Formats",
       description: "Get Direct, HTML, BBCode, and Markdown links ready to use in one click."
     }
-  ];
-
-  const stats = [
-    { label: "Images Hosted", value: "1M+" },
-    { label: "Uptime", value: "99.9%" },
-    { label: "Avg. Load Time", value: "120ms" },
-    { label: "Happy Users", value: "50k+" }
   ];
 
   return (
@@ -157,20 +150,6 @@ export default function Home() {
                 <h3 className="text-2xl font-black uppercase mb-4">{feature.title}</h3>
                 <p className="font-medium text-gray-400 group-hover:text-black">{feature.description}</p>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-32 bg-[#FFE873] border-y-8 border-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-6xl lg:text-8xl font-black mb-2">{stat.value}</div>
-                <div className="text-xl font-bold uppercase tracking-widest">{stat.label}</div>
-              </div>
             ))}
           </div>
         </div>

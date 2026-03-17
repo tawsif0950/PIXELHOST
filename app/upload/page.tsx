@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { UploadCloud, Copy, CheckCircle2, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
@@ -101,14 +101,14 @@ export default function UploadPage() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-8 rounded-[2rem] border-4 border-black bg-white shadow-[12px_12px_0px_0px_#000]"
+          className="p-4 sm:p-8 rounded-[2rem] border-4 border-black bg-white shadow-[8px_8px_0px_0px_#000] sm:shadow-[12px_12px_0px_0px_#000]"
         >
           <div 
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             className={`
-              relative overflow-hidden rounded-2xl border-4 border-dashed border-black transition-colors duration-300 flex flex-col items-center justify-center p-12 text-center min-h-[400px]
+              relative overflow-hidden rounded-2xl border-4 border-dashed border-black transition-colors duration-300 flex flex-col items-center justify-center p-6 sm:p-12 text-center min-h-[400px]
               ${isDragging ? 'bg-[#FFE873]' : 'bg-[#f8f9fa]'}
             `}
           >
@@ -129,26 +129,28 @@ export default function UploadPage() {
                 </h3>
                 
                 <div className="w-full space-y-6 text-left">
-                  {Object.entries(uploadResult.links).map(([key, value]) => (
-                    <div key={key} className="flex flex-col gap-2">
-                      <label className="text-sm font-black uppercase tracking-wider">{key} Link</label>
-                      <div className="flex items-center gap-3">
-                        <input 
-                          type="text" 
-                          readOnly 
-                          value={value} 
-                          className="flex-1 px-4 py-3 border-4 border-black rounded-xl bg-white text-sm font-mono outline-none shadow-[4px_4px_0px_0px_#000]"
-                        />
-                        <button 
-                          onClick={() => copyToClipboard(value, key)}
-                          className="p-3 border-4 border-black rounded-xl bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[4px_4px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-                          title="Copy to clipboard"
-                        >
-                          {copiedLink === key ? <CheckCircle2 size={24} /> : <Copy size={24} />}
-                        </button>
+                  {Object.entries(uploadResult.links)
+                    .filter(([key]) => key === 'html')
+                    .map(([key, value]) => (
+                      <div key={key} className="flex flex-col gap-2">
+                        <label className="text-sm font-black uppercase tracking-wider">{key} Link</label>
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                          <input 
+                            type="text" 
+                            readOnly 
+                            value={value} 
+                            className="flex-1 px-4 py-3 border-4 border-black rounded-xl bg-white text-sm font-mono outline-none shadow-[4px_4px_0px_0px_#000] min-w-0"
+                          />
+                          <button 
+                            onClick={() => copyToClipboard(value, key)}
+                            className="p-3 border-4 border-black rounded-xl bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[4px_4px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center justify-center"
+                            title="Copy to clipboard"
+                          >
+                            {copiedLink === key ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
                 
                 <button 
