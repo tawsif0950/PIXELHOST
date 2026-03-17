@@ -129,28 +129,32 @@ export default function UploadPage() {
                 </h3>
                 
                 <div className="w-full space-y-6 text-left">
-                  {Object.entries(uploadResult.links)
-                    .filter(([key]) => key === 'html')
-                    .map(([key, value]) => (
-                      <div key={key} className="flex flex-col gap-2">
-                        <label className="text-sm font-black uppercase tracking-wider">{key} Link</label>
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                          <input 
-                            type="text" 
-                            readOnly 
-                            value={value} 
-                            className="flex-1 px-4 py-3 border-4 border-black rounded-xl bg-white text-sm font-mono outline-none shadow-[4px_4px_0px_0px_#000] min-w-0"
-                          />
-                          <button 
-                            onClick={() => copyToClipboard(value, key)}
-                            className="p-3 border-4 border-black rounded-xl bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[4px_4px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center justify-center"
-                            title="Copy to clipboard"
-                          >
-                            {copiedLink === key ? <CheckCircle2 size={24} /> : <Copy size={24} />}
-                          </button>
-                        </div>
+                  {[
+                    { key: 'direct', label: 'Direct Link', value: uploadResult.links.direct },
+                    { key: 'html', label: 'HTML Embed', value: uploadResult.links.html },
+                    { key: 'bbcode', label: 'BBCode', value: uploadResult.links.bbcode },
+                    { key: 'markdown', label: 'Markdown', value: uploadResult.links.markdown },
+                    { key: 'cdn', label: 'CDN / Fast Link', value: uploadResult.links.cdn },
+                  ].map(({ key, label, value }) => (
+                    <div key={key} className="flex flex-col gap-2">
+                      <label className="text-sm font-black uppercase tracking-wider">{label}</label>
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        <input 
+                          type="text" 
+                          readOnly 
+                          value={value} 
+                          className="flex-1 px-4 py-3 border-4 border-black rounded-xl bg-white text-sm font-mono outline-none shadow-[4px_4px_0px_0px_#000] min-w-0"
+                        />
+                        <button 
+                          onClick={() => copyToClipboard(value, key)}
+                          className="p-3 border-4 border-black rounded-xl bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[4px_4px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center justify-center"
+                          title="Copy to clipboard"
+                        >
+                          {copiedLink === key ? <CheckCircle2 size={24} /> : <Copy size={24} />}
+                        </button>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
                 
                 <button 
