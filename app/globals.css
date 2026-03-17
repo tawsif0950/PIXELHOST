@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
 body {
   background-color: #ffffff;
   color: #000000;
