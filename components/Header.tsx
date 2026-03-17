@@ -25,10 +25,6 @@ export default function Header() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           <a href="/docs" className="font-bold hover:underline decoration-4 underline-offset-4">Docs</a>
-          <a href="/#pricing" className="font-bold hover:underline decoration-4 underline-offset-4">Pricing</a>
-          <button className={`px-6 py-2 border-4 border-black rounded-xl bg-[#FFE873] shadow-[4px_4px_0px_0px_#000] ${hardShadowHover} font-black uppercase tracking-wide`}>
-            Sign In
-          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -48,10 +44,6 @@ export default function Header() {
           className="md:hidden absolute top-full left-0 right-0 bg-white border-b-4 border-black p-6 flex flex-col gap-4"
         >
           <a href="/docs" className="font-bold text-lg border-b-2 border-black pb-2">Docs</a>
-          <a href="/#pricing" className="font-bold text-lg border-b-2 border-black pb-2">Pricing</a>
-          <button className="mt-4 py-3 border-4 border-black rounded-xl bg-[#FFE873] shadow-[4px_4px_0px_0px_#000] font-black uppercase">
-            Sign In
-          </button>
         </motion.div>
       )}
     </nav>
