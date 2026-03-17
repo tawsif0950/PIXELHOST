@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://cdn.jsdelivr.net/gh/tawsif0950/PIXELHOST@main/uploads/:path*"
+    }
+  ]
+}
