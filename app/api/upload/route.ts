@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
 const MAX_SIZE_MB = 10;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
@@ -26,8 +28,24 @@ export async function POST(request: Request) {
     const githubRepo = process.env.GITHUB_REPO;
     const githubBranch = process.env.GITHUB_BRANCH || 'main';
 
+    // Safe debugging logs
+    console.log('--- GitHub Credentials Check ---');
+    console.log('Token exists:', !!githubToken);
+    console.log('Username exists:', !!githubUsername);
+    console.log('Repo exists:', !!githubRepo);
+    console.log('Branch:', githubBranch);
+    console.log('--------------------------------');
+
     if (!githubToken || !githubUsername || !githubRepo) {
-      return NextResponse.json({ success: false, error: 'Server configuration error. Missing GitHub credentials.' }, { status: 500 });
+      return NextResponse.json({
+        success: false,
+        error: 'Missing GitHub credentials. Check Vercel environment variables.',
+        details: {
+          token: !!githubToken,
+          username: !!githubUsername,
+          repo: !!githubRepo
+        }
+      }, { status: 500 });
     }
 
     const buffer = await file.arrayBuffer();
