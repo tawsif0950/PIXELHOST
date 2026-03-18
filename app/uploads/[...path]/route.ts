@@ -4,6 +4,21 @@ export const runtime = 'nodejs';
 
 const LOGO_URL = 'https://i.postimg.cc/wvHYTSVw/Chat-GPT-Image-Mar-17-2026-11-02-33-PM.png';
 
+const fetchLogo = async () => {
+  const logoRes = await fetch(LOGO_URL);
+  if (logoRes.ok) {
+    const buffer = await logoRes.arrayBuffer();
+    const contentType = logoRes.headers.get('content-type') || 'image/png';
+    return new Response(buffer, {
+      headers: {
+        'Content-Type': contentType,
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  }
+  return new Response('Not Found', { status: 404 });
+};
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ path: string[] }> }
@@ -17,7 +32,7 @@ export async function GET(
   const githubBranch = process.env.GITHUB_BRANCH || 'main';
 
   if (!githubUsername || !githubRepo) {
-    return NextResponse.redirect(LOGO_URL);
+    return fetchLogo();
   }
 
   const githubRawUrl = `https://raw.githubusercontent.com/${githubUsername}/${githubRepo}/${githubBranch}/${fullPath}`;
@@ -36,11 +51,11 @@ export async function GET(
         },
       });
     } else {
-      // If not found or error, redirect to logo
-      return NextResponse.redirect(LOGO_URL);
+      // If not found or error, return logo
+      return fetchLogo();
     }
   } catch (error) {
     console.error('Error fetching image from GitHub:', error);
-    return NextResponse.redirect(LOGO_URL);
+    return fetchLogo();
   }
 }
