@@ -13,9 +13,14 @@ export default function Footer() {
           </div>
           <span className="text-2xl font-black uppercase">PixelHost</span>
         </div>
-        <p className="font-bold text-lg">
-          © {new Date().getFullYear()} PixelHost. All rights reserved.
-        </p>
+        <div className="flex flex-col items-center md:items-end gap-2">
+          <p className="font-bold text-lg">
+            © {new Date().getFullYear()} PixelHost. All rights reserved.
+          </p>
+          <p className="font-bold text-sm uppercase tracking-wider">
+            Developed by <a href="https://hackoria.space" target="_blank" rel="noopener noreferrer" className="hover:underline text-black">hackoria.space</a>
+          </p>
+        </div>
         <div className="flex gap-4">
         </div>
       </div>

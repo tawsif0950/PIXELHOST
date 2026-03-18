@@ -83,7 +83,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: 'Failed to upload image to GitHub.' }, { status: 500 });
     }
 
-    const directLink = `https://pixelhost.fun/${path}`;
+    const protocol = request.headers.get('x-forwarded-proto') || 'http';
+    const host = request.headers.get('host');
+    const origin = `${protocol}://${host}`;
+
+    const directLink = `${origin}/${path}`;
     const cdnLink = `https://cdn.jsdelivr.net/gh/${githubUsername}/${githubRepo}@${githubBranch}/${path}`;
 
     return NextResponse.json({
