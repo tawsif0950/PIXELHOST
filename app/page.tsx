@@ -205,6 +205,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About Section for SEO */}
+      <section className="py-32 bg-gray-50 border-t-8 border-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase mb-8 font-display">The Best Free <br/> Image Hosting Service</h2>
+              <div className="prose prose-xl font-medium text-gray-700 space-y-6">
+                <p>
+                  PixelHost is designed to be the fastest and most reliable <strong>free image hosting</strong> service on the web. Whether you are a developer looking for a <strong>direct image link generator</strong> or a creator needing to <strong>share images</strong> on forums, Discord, or GitHub, PixelHost provides the tools you need.
+                </p>
+                <p>
+                  Unlike other platforms, we focus on <strong>instant image uploads</strong> with zero friction. No accounts are required, and we don&apos;t track your data. We provide <strong>permanent image links</strong> that you can use in Markdown, BBCode, or HTML.
+                </p>
+                <p>
+                  Our infrastructure is built for speed, utilizing global CDNs to ensure your images load instantly for anyone, anywhere in the world. If you are looking for a <strong>postimage alternative</strong> or a better way to <strong>host images for free</strong>, PixelHost is the answer.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                { label: "Direct Links", color: "#FFE873" },
+                { label: "No Signup", color: "#FF90E8" },
+                { label: "Fast CDN", color: "#88FF88" },
+                { label: "Markdown", color: "#88CCFF" }
+              ].map((item, i) => (
+                <div key={i} style={{ backgroundColor: item.color }} className="p-8 border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000] flex items-center justify-center text-center">
+                  <span className="text-xl font-black uppercase">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-32 bg-[#FF90E8] border-t-8 border-black">
         <div className="max-w-5xl mx-auto px-6 text-center">

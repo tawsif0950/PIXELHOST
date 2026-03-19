@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.APP_URL || 'https://pixelhost.com'; // Fallback to a generic domain if APP_URL is not set
+  const baseUrl = process.env.APP_URL || 'https://ais-pre-rjzwhfdjcbot7jwi7w5bh4-48852631961.asia-southeast1.run.app'; // Use the correct shared URL
 
   return [
     {
