@@ -101,6 +101,38 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           src="https://www.highperformanceformat.com/e77f1d762f698d785a257e9e7c781133/invoke.js" 
           strategy="afterInteractive" 
         />
+
+        {/* Native Banner Ads */}
+        <div id="container-4ba34455187764348a1b50ff3519e0a8"></div>
+        <Script 
+          async 
+          data-cfasync="false" 
+          src="https://pl28967259.profitablecpmratenetwork.com/4ba34455187764348a1b50ff3519e0a8/invoke.js" 
+          strategy="afterInteractive" 
+        />
+
+        {/* Social Bar */}
+        <Script 
+          src="https://pl28967266.profitablecpmratenetwork.com/63/56/2c/63562cc882e94cee0e018d36ea4dd7c2.js" 
+          strategy="afterInteractive" 
+        />
+
+        {/* Another Banner Ads */}
+        <Script id="ad-banner-options-2" strategy="afterInteractive">
+          {`
+            atOptions = {
+              'key' : '072d87e163ef14ac173d91ccc908ba09',
+              'format' : 'iframe',
+              'height' : 300,
+              'width' : 160,
+              'params' : {}
+            };
+          `}
+        </Script>
+        <Script 
+          src="https://www.highperformanceformat.com/072d87e163ef14ac173d91ccc908ba09/invoke.js" 
+          strategy="afterInteractive" 
+        />
       </body>
     </html>
   );
