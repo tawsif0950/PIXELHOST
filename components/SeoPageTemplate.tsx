@@ -52,10 +52,7 @@ export default function SeoPageTemplate({
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      {/* Top Banner Ad 468x60 */}
-      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
-
-      <main className="max-w-7xl mx-auto px-6 pt-10 pb-20">
+      <main className="max-w-7xl mx-auto px-6 pt-20 pb-32">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
             <div className={`inline-block border-4 border-black px-4 py-1 rounded-full font-bold mb-6 shadow-[4px_4px_0px_0px_#000] transform -rotate-2 ${bgColor}`}>

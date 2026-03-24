@@ -14,10 +14,7 @@ export default function BestFreeImageHosting2026() {
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      {/* Top Banner Ad 468x60 */}
-      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
-
-      <main className="max-w-4xl mx-auto px-6 py-10">
+      <main className="max-w-4xl mx-auto px-6 py-20">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

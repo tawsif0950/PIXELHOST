@@ -17,7 +17,6 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AdBanner from '@/components/AdBanner';
-import SmartLinkButton from '@/components/SmartLinkButton';
 
 export default function Home() {
   const hardShadowHover = "transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_#000]";
@@ -49,11 +48,8 @@ export default function Home() {
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      {/* Top Banner Ad 468x60 */}
-      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
-
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-6 pt-10 pb-20">
+      <main className="max-w-7xl mx-auto px-6 pt-20 pb-32">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
           {/* Hero Text */}
@@ -98,7 +94,9 @@ export default function Home() {
               >
                 Start Uploading <ArrowRight size={24} />
               </Link>
-              <SmartLinkButton url="https://www.profitablecpmratenetwork.com/r6hn6d2f9?key=7c09227211eee5006928a39a736d6526" text="Partner Link" className="py-5 px-10 text-xl" />
+              <a href="/docs" className={`inline-block px-10 py-5 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase tracking-wide w-full sm:w-auto text-xl text-center`}>
+                Read Docs
+              </a>
             </motion.div>
           </div>
 

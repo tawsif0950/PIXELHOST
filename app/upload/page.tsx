@@ -94,10 +94,7 @@ export default function UploadPage() {
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      {/* Top Banner Ad 468x60 */}
-      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
-
-      <main className="max-w-4xl mx-auto px-6 py-10">
+      <main className="max-w-4xl mx-auto px-6 py-20">
         <Link href="/" className="inline-flex items-center gap-2 font-bold uppercase mb-8 hover:underline">
           <ArrowLeft size={20} /> Back to Home
         </Link>
