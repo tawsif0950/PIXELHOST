@@ -210,29 +210,36 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl lg:text-6xl font-black uppercase mb-8 font-display">The Best Free <br/> Image Hosting Service</h2>
+              <h2 className="text-4xl lg:text-6xl font-black uppercase mb-8 font-display">The #1 Free Image Hosting Service for 2026</h2>
               <div className="prose prose-xl font-medium text-gray-700 space-y-6">
                 <p>
                   PixelHost is designed to be the fastest and most reliable <strong>free image hosting</strong> service on the web. Whether you are a developer looking for a <strong>direct image link generator</strong> or a creator needing to <strong>share images</strong> on forums, Discord, or GitHub, PixelHost provides the tools you need.
                 </p>
                 <p>
-                  Unlike other platforms, we focus on <strong>instant image uploads</strong> with zero friction. No accounts are required, and we don&apos;t track your data. We provide <strong>permanent image links</strong> that you can use in Markdown, BBCode, or HTML.
+                  Our platform makes it easy to <strong>upload image and get direct link</strong> instantly. We understand that speed and simplicity are key, which is why we offer <strong>no signup image hosting</strong>. Simply drag and drop your files, and our high-speed servers will process them in milliseconds, providing you with <strong>permanent image links</strong> that never expire.
                 </p>
                 <p>
-                  Our infrastructure is built for speed, utilizing global CDNs to ensure your images load instantly for anyone, anywhere in the world. If you are looking for a <strong>postimage alternative</strong> or a better way to <strong>host images for free</strong>, PixelHost is the answer.
+                  PixelHost is the ultimate <strong>postimage alternative</strong>. We provide a variety of embed codes, including <strong>BBCode image hosting</strong> for forums and <strong>Markdown image hosting</strong> for developers. Our <strong>direct link image hosting</strong> ensures that your images load perfectly every time, without annoying landing pages or slow redirects.
+                </p>
+                <h3 className="text-3xl font-black uppercase mt-12 mb-4">Why Choose PixelHost for Image Sharing?</h3>
+                <p>
+                  When you need to <strong>host images for free</strong>, you want a service that is both fast and secure. PixelHost utilizes a global CDN to serve your images from the closest possible location, ensuring lightning-fast load times worldwide. Our <strong>free image hosting with direct link</strong> capability is perfect for eBay sellers, forum users, and web developers alike.
+                </p>
+                <p>
+                  We support all major formats, including JPG, PNG, GIF, and WEBP. With our <strong>fast image hosting</strong>, you can upload multiple images at once and get a list of links ready to be shared. Experience the best <strong>image sharing</strong> platform today—no registration, no limits, just pure performance.
                 </p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
               {[
-                { label: "Direct Links", color: "#FFE873" },
-                { label: "No Signup", color: "#FF90E8" },
-                { label: "Fast CDN", color: "#88FF88" },
-                { label: "Markdown", color: "#88CCFF" }
+                { label: "Direct Links", color: "#FFE873", href: "/image-hosting-with-direct-link" },
+                { label: "Free Hosting", color: "#FF90E8", href: "/free-image-hosting" },
+                { label: "Upload Image", color: "#88FF88", href: "/upload-image" },
+                { label: "BBCode Ads", color: "#88CCFF", href: "/bbcode-image-hosting" }
               ].map((item, i) => (
-                <div key={i} style={{ backgroundColor: item.color }} className="p-8 border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000] flex items-center justify-center text-center">
+                <Link key={i} href={item.href} style={{ backgroundColor: item.color }} className={`p-8 border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_#000] flex items-center justify-center text-center ${hardShadowHover}`}>
                   <span className="text-xl font-black uppercase">{item.label}</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

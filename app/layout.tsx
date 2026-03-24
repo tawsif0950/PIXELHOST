@@ -14,22 +14,22 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ais-pre-rjzwhfdjcbot7jwi7w5bh4-48852631961.asia-southeast1.run.app'),
-  title: 'PixelHost – Free Image Hosting & Direct Image Links Generator',
-  description: 'PixelHost is a fast and free image hosting platform that lets you upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required. Share your images anywhere easily with high speed hosting.',
-  keywords: ['pixelhost', 'pixel host', 'image hosting', 'free image hosting', 'direct image links', 'image upload', 'share images', 'fast image host', 'no signup image hosting', 'postimage alternative', 'imgur alternative', 'developer image host'],
+  metadataBase: new URL('https://www.pixelhost.fun'),
+  title: 'Free Image Hosting - Upload Image & Get Direct Link | PixelHost',
+  description: 'PixelHost is the best free image hosting platform. Upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required, fast CDN, and reliable image sharing.',
+  keywords: ['free image hosting', 'upload image get direct link', 'bbcode image hosting', 'markdown image hosting', 'direct link generator', 'image sharing', 'postimage alternative', 'imgur alternative', 'fast image hosting'],
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.pixelhost.fun',
   },
   icons: {
     icon: 'https://i.postimg.cc/wvHYTSVw/Chat-GPT-Image-Mar-17-2026-11-02-33-PM.png',
     apple: 'https://i.postimg.cc/wvHYTSVw/Chat-GPT-Image-Mar-17-2026-11-02-33-PM.png',
   },
   openGraph: {
-    title: 'PixelHost – Free Image Hosting & Direct Image Links Generator',
-    description: 'PixelHost is a fast and free image hosting platform that lets you upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required. Share your images anywhere easily with high speed hosting.',
+    title: 'Free Image Hosting - Upload Image & Get Direct Link | PixelHost',
+    description: 'Upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required, fast CDN, and reliable image sharing.',
     type: 'website',
-    url: 'https://ais-pre-rjzwhfdjcbot7jwi7w5bh4-48852631961.asia-southeast1.run.app',
+    url: 'https://www.pixelhost.fun',
     siteName: 'PixelHost',
     images: [
       {
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PixelHost – Free Image Hosting & Direct Image Links Generator',
-    description: 'PixelHost is a fast and free image hosting platform that lets you upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required. Share your images anywhere easily with high speed hosting.',
+    title: 'Free Image Hosting - Upload Image & Get Direct Link | PixelHost',
+    description: 'Upload images instantly and get direct links, HTML, BBCode, and Markdown embed codes. No signup required, fast CDN, and reliable image sharing.',
     images: ['https://i.postimg.cc/wvHYTSVw/Chat-GPT-Image-Mar-17-2026-11-02-33-PM.png'],
   }
 };
@@ -54,7 +54,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     '@type': 'WebApplication',
     'name': 'PixelHost',
     'description': 'Free image hosting and direct image links generator.',
-    'url': 'https://ais-pre-rjzwhfdjcbot7jwi7w5bh4-48852631961.asia-southeast1.run.app',
+    'url': 'https://www.pixelhost.fun',
     'applicationCategory': 'MultimediaApplication',
     'operatingSystem': 'All',
     'offers': {
