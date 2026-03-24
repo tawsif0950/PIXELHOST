@@ -70,12 +70,47 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     ]
   };
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': 'Is PixelHost completely free?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Yes, PixelHost is a 100% free image hosting service. You can upload and share images without any hidden costs or subscriptions.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'Do I need to sign up to upload images?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'No, you do not need to create an account. We offer free image hosting with no signup required for instant uploads.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'How long are the images hosted?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Images are hosted permanently. We provide permanent direct links for all your uploaded images.'
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body suppressHydrationWarning>
