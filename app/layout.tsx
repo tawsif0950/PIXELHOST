@@ -73,18 +73,35 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9081783676352581"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        {children}
+        {/* Popunder Script */}
+        <Script 
+          src="https://pl28967231.profitablecpmratenetwork.com/19/4b/d9/194bd95f07de96cab1e31967e8cc1ae6.js" 
+          strategy="afterInteractive" 
+        />
+        {/* Ad Banner Script */}
+        <Script id="ad-banner-options" strategy="afterInteractive">
+          {`
+            atOptions = {
+              'key' : 'e77f1d762f698d785a257e9e7c781133',
+              'format' : 'iframe',
+              'height' : 50,
+              'width' : 320,
+              'params' : {}
+            };
+          `}
+        </Script>
+        <Script 
+          src="https://www.highperformanceformat.com/e77f1d762f698d785a257e9e7c781133/invoke.js" 
+          strategy="afterInteractive" 
+        />
+      </body>
     </html>
   );
 }
