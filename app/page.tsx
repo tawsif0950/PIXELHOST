@@ -16,6 +16,8 @@ import {
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AdBanner from '@/components/AdBanner';
+import SmartLinkButton from '@/components/SmartLinkButton';
 
 export default function Home() {
   const hardShadowHover = "transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_#000]";
@@ -47,8 +49,11 @@ export default function Home() {
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
+      {/* Top Banner Ad 468x60 */}
+      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
+
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-6 pt-20 pb-32">
+      <main className="max-w-7xl mx-auto px-6 pt-10 pb-20">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
           {/* Hero Text */}
@@ -93,9 +98,7 @@ export default function Home() {
               >
                 Start Uploading <ArrowRight size={24} />
               </Link>
-              <a href="/docs" className={`inline-block px-10 py-5 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase tracking-wide w-full sm:w-auto text-xl text-center`}>
-                Read Docs
-              </a>
+              <SmartLinkButton url="https://www.profitablecpmratenetwork.com/r6hn6d2f9?key=7c09227211eee5006928a39a736d6526" text="Partner Link" className="py-5 px-10 text-xl" />
             </motion.div>
           </div>
 
@@ -130,33 +133,41 @@ export default function Home() {
       </main>
 
       {/* Features Section */}
-      <section className="bg-black text-white py-32">
+      <section className="bg-black text-white py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl lg:text-7xl font-black uppercase mb-6 font-display">Why PixelHost?</h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">We&apos;ve built the ultimate tool for sharing images without the friction of traditional hosting.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-8 border-4 border-white rounded-3xl hover:bg-white hover:text-black transition-colors duration-300 group"
-              >
-                <div className="mb-6 transform group-hover:scale-110 transition-transform">{feature.icon}</div>
-                <h3 className="text-2xl font-black uppercase mb-4">{feature.title}</h3>
-                <p className="font-medium text-gray-400 group-hover:text-black">{feature.description}</p>
-              </motion.div>
-            ))}
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            <div className="flex-1">
+              <div className="text-center lg:text-left mb-16">
+                <h2 className="text-5xl lg:text-7xl font-black uppercase mb-6 font-display">Why PixelHost?</h2>
+                <p className="text-xl text-gray-400 max-w-2xl">We&apos;ve built the ultimate tool for sharing images without the friction of traditional hosting.</p>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-8">
+                {features.map((feature, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="p-8 border-4 border-white rounded-3xl hover:bg-white hover:text-black transition-colors duration-300 group"
+                  >
+                    <div className="mb-6 transform group-hover:scale-110 transition-transform">{feature.icon}</div>
+                    <h3 className="text-2xl font-black uppercase mb-4">{feature.title}</h3>
+                    <p className="font-medium text-gray-400 group-hover:text-black">{feature.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            {/* Sidebar Ad 160x600 */}
+            <div className="hidden lg:block w-[160px] shrink-0">
+              <AdBanner dataKey="df39010bac07f2a2c2007feccb82f47d" width={160} height={600} />
+            </div>
           </div>
         </div>
       </section>
 
       {/* How it Works */}
-      <section className="py-32 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-20 items-center">
             <div className="flex-1">
@@ -177,8 +188,8 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="flex-1 w-full">
-              <div className="p-8 border-8 border-black rounded-[3rem] bg-[#88CCFF] shadow-[16px_16px_0px_0px_#000]">
+            <div className="flex-1 w-full flex flex-col items-center gap-8">
+              <div className="p-8 border-8 border-black rounded-[3rem] bg-[#88CCFF] shadow-[16px_16px_0px_0px_#000] w-full">
                 <div className="bg-white border-4 border-black rounded-2xl p-6 space-y-4">
                   <div className="flex items-center gap-4 border-b-4 border-black pb-4">
                     <Share2 size={24} />
@@ -200,6 +211,9 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              
+              {/* Mid Banner Ad 300x250 */}
+              <AdBanner dataKey="46eea6dc12051609b0b8dc8ee4729962" width={300} height={250} />
             </div>
           </div>
         </div>

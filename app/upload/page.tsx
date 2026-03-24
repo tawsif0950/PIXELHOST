@@ -6,6 +6,7 @@ import { UploadCloud, Copy, CheckCircle2, Loader2, ArrowLeft } from 'lucide-reac
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AdBanner from '@/components/AdBanner';
 
 interface UploadResult {
   success: boolean;
@@ -93,7 +94,10 @@ export default function UploadPage() {
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      <main className="max-w-4xl mx-auto px-6 py-20">
+      {/* Top Banner Ad 468x60 */}
+      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
+
+      <main className="max-w-4xl mx-auto px-6 py-10">
         <Link href="/" className="inline-flex items-center gap-2 font-bold uppercase mb-8 hover:underline">
           <ArrowLeft size={20} /> Back to Home
         </Link>
@@ -227,6 +231,11 @@ export default function UploadPage() {
             )}
           </div>
         </motion.div>
+
+        {/* Bottom Banner Ad 300x250 */}
+        <div className="mt-12">
+          <AdBanner dataKey="46eea6dc12051609b0b8dc8ee4729962" width={300} height={250} />
+        </div>
       </main>
 
       <Footer />

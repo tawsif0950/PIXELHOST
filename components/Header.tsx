@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SmartLinkButton from '@/components/SmartLinkButton';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           <Link href="/docs" className="font-bold hover:underline decoration-4 underline-offset-4">Docs</Link>
+          <SmartLinkButton url="https://www.profitablecpmratenetwork.com/r6hn6d2f9?key=7c09227211eee5006928a39a736d6526" text="Sponsor" className="py-2 px-4 text-xs" />
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -45,6 +47,7 @@ export default function Header() {
           className="md:hidden absolute top-full left-0 right-0 bg-white border-b-4 border-black p-6 flex flex-col gap-4"
         >
           <Link href="/docs" className="font-bold text-lg border-b-2 border-black pb-2">Docs</Link>
+          <SmartLinkButton url="https://www.profitablecpmratenetwork.com/r6hn6d2f9?key=7c09227211eee5006928a39a736d6526" text="Sponsor" className="w-full justify-center" />
         </motion.div>
       )}
     </nav>

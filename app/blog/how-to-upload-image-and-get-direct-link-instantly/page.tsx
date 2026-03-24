@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UploadCloud, Zap, Code, CheckCircle2 } from 'lucide-react';
+import AdBanner from '@/components/AdBanner';
 
 export default function HowToUploadImage() {
   const hardShadowHover = "transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_#000]";
@@ -12,7 +13,11 @@ export default function HowToUploadImage() {
   return (
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
-      <main className="max-w-4xl mx-auto px-6 py-20">
+
+      {/* Top Banner Ad 468x60 */}
+      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
+
+      <main className="max-w-4xl mx-auto px-6 py-10">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -35,6 +40,9 @@ export default function HowToUploadImage() {
           <p>
             Once you are on the homepage, click <strong>“Upload Image”</strong> or drag and drop your file into our uploader. We support all major formats, including JPG, PNG, GIF, and WEBP.
           </p>
+
+          {/* Mid Banner Ad 300x250 */}
+          <AdBanner dataKey="46eea6dc12051609b0b8dc8ee4729962" width={300} height={250} />
 
           <h2 className="text-4xl font-black uppercase text-black mt-12">Step 3: Get Your Direct Link</h2>
           <p>

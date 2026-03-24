@@ -4,6 +4,7 @@ import { ArrowRight, Zap, Shield, Globe, Code } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import InternalLinks from './InternalLinks';
+import AdBanner from '@/components/AdBanner';
 
 interface SeoPageTemplateProps {
   h1: string;
@@ -51,7 +52,10 @@ export default function SeoPageTemplate({
     <div className="min-h-screen font-sans selection:bg-[#FFE873]">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-6 pt-20 pb-32">
+      {/* Top Banner Ad 468x60 */}
+      <AdBanner dataKey="f60bb3c33ea02991baadb5fe0f4de9dc" width={468} height={60} />
+
+      <main className="max-w-7xl mx-auto px-6 pt-10 pb-20">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
             <div className={`inline-block border-4 border-black px-4 py-1 rounded-full font-bold mb-6 shadow-[4px_4px_0px_0px_#000] transform -rotate-2 ${bgColor}`}>
@@ -71,6 +75,11 @@ export default function SeoPageTemplate({
                 Upload Now <ArrowRight size={24} />
               </Link>
             </div>
+          </div>
+          
+          {/* Sidebar Ad 160x600 */}
+          <div className="hidden lg:block w-[160px] shrink-0">
+            <AdBanner dataKey="df39010bac07f2a2c2007feccb82f47d" width={160} height={600} />
           </div>
         </div>
       </main>
@@ -102,6 +111,11 @@ export default function SeoPageTemplate({
           </div>
           
           <InternalLinks keyword={keyword} />
+
+          {/* Bottom Banner Ad 300x250 */}
+          <div className="mt-16">
+            <AdBanner dataKey="46eea6dc12051609b0b8dc8ee4729962" width={300} height={250} />
+          </div>
         </div>
       </section>
 
