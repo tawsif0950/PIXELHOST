@@ -11,7 +11,21 @@ export default function Header() {
   const hardShadowHover = "transition-all hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_#000]";
 
   return (
-    <nav className="sticky top-0 z-50 px-6 py-4 bg-white border-b-4 border-black">
+    <header className="sticky top-0 z-50 flex flex-col">
+      {/* Global Notice Banner */}
+      <div className="bg-[#FFE873] border-b-4 border-black px-4 py-2 text-center font-black uppercase tracking-wide text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 z-50 relative">
+        <span>🚀 We develop any website: E-commerce, SaaS & Custom Apps!</span>
+        <a 
+          href="https://wa.me/+8801410199221" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 bg-white px-3 py-1 border-2 border-black rounded-full hover:bg-[#88FF88] transition-colors shadow-[2px_2px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none"
+        >
+          Contact WhatsApp: +8801410199221
+        </a>
+      </div>
+
+      <nav className="px-6 py-4 bg-white border-b-4 border-black relative z-40">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <motion.div 
@@ -47,6 +61,7 @@ export default function Header() {
           <Link href="/docs" className="font-bold text-lg border-b-2 border-black pb-2">Docs</Link>
         </motion.div>
       )}
-    </nav>
+      </nav>
+    </header>
   );
 }
