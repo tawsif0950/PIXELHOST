@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { UploadCloud, Copy, CheckCircle2, Loader2, ArrowLeft } from 'lucide-react';
+import { UploadCloud, Copy, CheckCircle2, Loader2, ArrowLeft, X } from 'lucide-react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,6 +11,7 @@ import AdBanner from '@/components/AdBanner';
 interface UploadResult {
   success: boolean;
   filename?: string;
+  originalName?: string;
   links?: {
     direct: string;
     html: string;
@@ -24,9 +25,18 @@ interface UploadResult {
 export default function UploadPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadResult, setUploadResult] = useState<UploadResult | null>(null);
+  const [uploadResults, setUploadResults] = useState<UploadResult[] | null>(null);
   const [copiedLink, setCopiedLink] = useState<string | null>(null);
+
+  useEffect(() => {
+    const objectUrls = files.map(file => URL.createObjectURL(file));
+    setPreviews(objectUrls);
+    return () => {
+      objectUrls.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [files]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -42,15 +52,15 @@ export default function UploadPage() {
     e.preventDefault();
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      setFiles(Array.from(e.dataTransfer.files));
-      setUploadResult(null);
+      setFiles(prev => [...prev, ...Array.from(e.dataTransfer.files!)]);
+      setUploadResults(null);
     }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setFiles(Array.from(e.target.files));
-      setUploadResult(null);
+      setFiles(prev => [...prev, ...Array.from(e.target.files!)]);
+      setUploadResults(null);
     }
   };
 
@@ -58,28 +68,29 @@ export default function UploadPage() {
     if (files.length === 0) return;
 
     setIsUploading(true);
-    setUploadResult(null);
+    setUploadResults(null);
 
-    const formData = new FormData();
-    formData.append('file', files[0]);
+    const uploadPromises = files.map(async (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
 
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const result = await response.json();
-      setUploadResult(result);
-      if (result.success) {
-        setFiles([]);
+      try {
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        const result = await response.json();
+        return { ...result, originalName: file.name };
+      } catch (error) {
+        console.error('Upload failed:', error);
+        return { success: false, error: 'Upload failed due to network error.', originalName: file.name };
       }
-    } catch (error) {
-      console.error('Upload failed:', error);
-      setUploadResult({ success: false, error: 'Upload failed due to network error.' });
-    } finally {
-      setIsUploading(false);
-    }
+    });
+
+    const completedResults = await Promise.all(uploadPromises);
+    setUploadResults(completedResults);
+    setIsUploading(false);
+    setFiles([]);
   };
 
   const copyToClipboard = (text: string, type: string) => {
@@ -113,56 +124,75 @@ export default function UploadPage() {
               ${isDragging ? 'bg-[#FFE873]' : 'bg-[#f8f9fa]'}
             `}
           >
-            <div className="w-24 h-24 border-4 border-black rounded-full bg-white shadow-[4px_4px_0px_0px_#000] flex items-center justify-center mb-8 transform -rotate-6">
+            <div className="w-24 h-24 border-4 border-black rounded-full bg-white shadow-[4px_4px_0px_0px_#000] flex items-center justify-center mb-8 transform -rotate-6 shrink-0">
               {isUploading ? (
                 <Loader2 size={40} strokeWidth={2.5} className="animate-spin" />
-              ) : uploadResult?.success ? (
+              ) : uploadResults?.some(r => r.success) ? (
                 <CheckCircle2 size={40} strokeWidth={2.5} className="text-green-500" />
               ) : (
                 <UploadCloud size={40} strokeWidth={2.5} />
               )}
             </div>
             
-            {uploadResult?.success && uploadResult.links ? (
-              <div className="flex flex-col items-center w-full max-w-lg">
+            {uploadResults ? (
+              <div className="flex flex-col items-center w-full max-w-3xl">
                 <h3 className="text-3xl font-black uppercase mb-8 text-green-600 font-display">
-                  Upload Success!
+                  Upload Complete!
                 </h3>
                 
-                <div className="w-full space-y-6 text-left">
-                  {[
-                    { key: 'direct', label: 'Direct Link', value: uploadResult.links.direct },
-                    { key: 'html', label: 'HTML Embed', value: uploadResult.links.html },
-                    { key: 'bbcode', label: 'BBCode', value: uploadResult.links.bbcode },
-                    { key: 'markdown', label: 'Markdown', value: uploadResult.links.markdown },
-                    { key: 'cdn', label: 'CDN / Fast Link', value: uploadResult.links.cdn },
-                  ].map(({ key, label, value }) => (
-                    <div key={key} className="flex flex-col gap-2">
-                      <label className="text-sm font-black uppercase tracking-wider">{label}</label>
-                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                        <input 
-                          type="text" 
-                          readOnly 
-                          value={value} 
-                          className="flex-1 px-4 py-3 border-4 border-black rounded-xl bg-white text-sm font-mono outline-none shadow-[4px_4px_0px_0px_#000] min-w-0"
-                        />
-                        <button 
-                          onClick={() => copyToClipboard(value, key)}
-                          className="p-3 border-4 border-black rounded-xl bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[4px_4px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none flex items-center justify-center"
-                          title="Copy to clipboard"
-                        >
-                          {copiedLink === key ? <CheckCircle2 size={24} /> : <Copy size={24} />}
-                        </button>
-                      </div>
+                <div className="w-full space-y-8 text-left">
+                  {uploadResults.map((result, index) => (
+                    <div key={index} className="bg-gray-50 p-6 rounded-2xl border-4 border-black shadow-[4px_4px_0px_0px_#000]">
+                      {result.success && result.links ? (
+                        <div className="flex flex-col md:flex-row gap-6 items-start">
+                          <div className="w-full md:w-1/3 shrink-0">
+                            <div className="aspect-square rounded-xl border-4 border-black overflow-hidden bg-white">
+                              <img src={result.links.direct} alt={result.originalName || 'Uploaded image'} className="w-full h-full object-cover" />
+                            </div>
+                            <p className="mt-2 text-xs font-bold truncate text-center">{result.originalName}</p>
+                          </div>
+                          <div className="w-full md:w-2/3 space-y-4">
+                            {[
+                              { key: `direct-${index}`, label: 'Direct Link', value: result.links.direct },
+                              { key: `html-${index}`, label: 'HTML Embed', value: result.links.html },
+                              { key: `bbcode-${index}`, label: 'BBCode', value: result.links.bbcode },
+                              { key: `markdown-${index}`, label: 'Markdown', value: result.links.markdown },
+                            ].map(({ key, label, value }) => (
+                              <div key={key} className="flex flex-col gap-1">
+                                <label className="text-xs font-black uppercase tracking-wider text-gray-500">{label}</label>
+                                <div className="flex items-center gap-2">
+                                  <input 
+                                    type="text" 
+                                    readOnly 
+                                    value={value} 
+                                    className="flex-1 px-3 py-2 border-2 border-black rounded-lg bg-white text-xs font-mono outline-none shadow-[2px_2px_0px_0px_#000] min-w-0"
+                                  />
+                                  <button 
+                                    onClick={() => copyToClipboard(value, key)}
+                                    className="p-2 border-2 border-black rounded-lg bg-[#FFE873] hover:bg-[#FF90E8] transition-colors shadow-[2px_2px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none flex items-center justify-center shrink-0"
+                                    title="Copy to clipboard"
+                                  >
+                                    {copiedLink === key ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-red-500 font-bold flex items-center gap-2">
+                          <X size={24} /> Failed to upload {result.originalName}: {result.error}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
                 
                 <button 
-                  onClick={() => setUploadResult(null)}
+                  onClick={() => setUploadResults(null)}
                   className={`mt-12 px-8 py-3 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase`}
                 >
-                  Upload Another
+                  Upload More
                 </button>
               </div>
             ) : isUploading ? (
@@ -171,43 +201,46 @@ export default function UploadPage() {
                   Uploading...
                 </h3>
                 <p className="font-medium mb-8 text-xl">
-                  Please wait while we process your image.
+                  Please wait while we process your images.
                 </p>
               </div>
             ) : files.length > 0 ? (
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center w-full max-w-2xl">
                 <h3 className="text-4xl font-black uppercase mb-6 font-display">
                   {files.length} file{files.length > 1 ? 's' : ''} ready
                 </h3>
-                <div className="flex flex-wrap gap-4 justify-center mb-10 max-w-md">
-                  {files.slice(0, 3).map((f, i) => (
-                    <span key={i} className="text-base px-6 py-3 border-4 border-black bg-white font-black rounded-xl shadow-[6px_6px_0px_0px_#000] truncate max-w-[200px]">
-                      {f.name}
-                    </span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-10 w-full">
+                  {files.map((f, i) => (
+                    <div key={i} className="relative aspect-square rounded-xl border-4 border-black overflow-hidden bg-white shadow-[4px_4px_0px_0px_#000] group">
+                      <img src={previews[i]} alt={f.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-x-0 bottom-0 bg-black/70 text-white text-xs p-1 truncate text-center font-medium">
+                        {f.name}
+                      </div>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setFiles(files.filter((_, index) => index !== i));
+                        }}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 border-2 border-black opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
                   ))}
-                  {files.length > 3 && (
-                    <span className="text-base px-6 py-3 border-4 border-black bg-[#FFE873] font-black rounded-xl shadow-[6px_6px_0px_0px_#000]">
-                      +{files.length - 3} more
-                    </span>
-                  )}
                 </div>
                 
-                {uploadResult?.error && (
-                  <p className="text-red-500 font-black mb-6 text-xl">{uploadResult.error}</p>
-                )}
-
                 <div className="flex gap-6">
                   <button 
                     onClick={() => setFiles([])}
                     className={`px-8 py-3 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase`}
                   >
-                    Clear
+                    Clear All
                   </button>
                   <button 
                     onClick={handleUpload}
                     className={`px-10 py-3 border-4 border-black rounded-2xl bg-[#FF90E8] shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase tracking-wide`}
                   >
-                    Upload Now
+                    Upload All
                   </button>
                 </div>
               </div>
