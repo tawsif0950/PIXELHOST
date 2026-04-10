@@ -70,7 +70,10 @@ export default function UploadPage() {
     setIsUploading(true);
     setUploadResults(null);
 
-    const uploadPromises = files.map(async (file) => {
+    const completedResults: UploadResult[] = [];
+
+    // Upload sequentially to prevent GitHub API concurrency conflicts
+    for (const file of files) {
       const formData = new FormData();
       formData.append('file', file);
 
@@ -80,14 +83,13 @@ export default function UploadPage() {
           body: formData,
         });
         const result = await response.json();
-        return { ...result, originalName: file.name };
+        completedResults.push({ ...result, originalName: file.name });
       } catch (error) {
         console.error('Upload failed:', error);
-        return { success: false, error: 'Upload failed due to network error.', originalName: file.name };
+        completedResults.push({ success: false, error: 'Upload failed due to network error.', originalName: file.name });
       }
-    });
+    }
 
-    const completedResults = await Promise.all(uploadPromises);
     setUploadResults(completedResults);
     setIsUploading(false);
     setFiles([]);
@@ -234,13 +236,13 @@ export default function UploadPage() {
                     onClick={() => setFiles([])}
                     className={`px-8 py-3 border-4 border-black rounded-2xl bg-white shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase`}
                   >
-                    Clear All
+                    {files.length > 1 ? 'Clear All' : 'Clear'}
                   </button>
                   <button 
                     onClick={handleUpload}
                     className={`px-10 py-3 border-4 border-black rounded-2xl bg-[#FF90E8] shadow-[8px_8px_0px_0px_#000] ${hardShadowHover} font-black uppercase tracking-wide`}
                   >
-                    Upload All
+                    {files.length > 1 ? 'Upload All' : 'Upload Now'}
                   </button>
                 </div>
               </div>
